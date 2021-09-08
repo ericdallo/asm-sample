@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 class JavaParserClassVisitor extends ClassVisitor {
 
-    private List<JavaParseFieldResult> fields = new ArrayList<>();
+    private List<JavaParserFieldResult> fields = new ArrayList<>();
+    private List<JavaParserMethodResult> methods = new ArrayList<>();
 
     public JavaParserClassVisitor() {
         super(Opcodes.ASM9);
@@ -19,11 +21,19 @@ class JavaParserClassVisitor extends ClassVisitor {
     @Override
     public FieldVisitor visitField(int access, String name, String descriptor, String signature, Object value) {
         FieldVisitor visitField = super.visitField(access, name, descriptor, signature, value);
-        fields.add(new JavaParseFieldResult(name, Type.getType(descriptor)));
+        fields.add(new JavaParserFieldResult(name, Type.getType(descriptor)));
         return visitField;
     }
 
-    public JavaParseClassResult buildResult() {
-        return new JavaParseClassResult(fields);
+    @Override
+    public MethodVisitor visitMethod(int access, String name, String descriptor, String signature,
+            String[] exceptions) {
+        MethodVisitor visitMethod = super.visitMethod(access, name, descriptor, signature, exceptions);
+        methods.add(new JavaParserMethodResult(name, Type.getMethodType(descriptor)));
+        return visitMethod;
+    }
+
+    public JavaParserClassResult buildResult() {
+        return new JavaParserClassResult(fields, methods);
     }
 }

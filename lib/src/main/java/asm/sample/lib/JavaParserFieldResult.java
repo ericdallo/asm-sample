@@ -4,11 +4,11 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.objectweb.asm.Type;
 
-public class JavaParseFieldResult {
+public class JavaParserFieldResult {
     private String name;
     private String type;
 
-    public JavaParseFieldResult(String name, Type type) {
+    public JavaParserFieldResult(String name, Type type) {
         this.name = name;
         this.type = type.getClassName();
     }
