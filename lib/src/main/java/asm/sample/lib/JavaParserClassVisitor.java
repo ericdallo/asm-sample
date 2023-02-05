@@ -33,7 +33,7 @@ class JavaParserClassVisitor extends ClassVisitor {
         return visitMethod;
     }
 
-    public JavaParserClassResult buildResult() {
+   public JavaParserClassResult buildResult() {
         return new JavaParserClassResult(fields, methods);
     }
 }

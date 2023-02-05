@@ -1,7 +1,5 @@
 package asm.sample.lib;
 
-import java.io.IOException;
-
 import org.objectweb.asm.ClassReader;
 
 public class JavaParser {

@@ -8,9 +8,9 @@ public class JavaParserMethodResult {
     private String name;
     private String returnType;
 
-    public JavaParserMethodResult(String name, Type returnType) {
+    public JavaParserMethodResult(String name, Type methodType) {
         this.name = name;
-        this.returnType = returnType.getReturnType().getClassName();
+        this.returnType = methodType.getReturnType().getClassName();
     }
 
     public String getName() {
